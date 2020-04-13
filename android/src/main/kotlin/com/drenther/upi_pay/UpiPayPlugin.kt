@@ -82,7 +82,7 @@ class UpiPayPlugin internal constructor(registrar: Registrar, channel: MethodCha
     }
 
     private fun getInstalledUpiApps() {
-        val uriBuilder = Uri.Builder()
+        /*val uriBuilder = Uri.Builder()
         uriBuilder.scheme("upi").authority("pay")
         uriBuilder.appendQueryParameter("pa", "abc@ybl")
         uriBuilder.appendQueryParameter("pn", "abc")
@@ -90,10 +90,23 @@ class UpiPayPlugin internal constructor(registrar: Registrar, channel: MethodCha
         uriBuilder.appendQueryParameter("am", "10")
         uriBuilder.appendQueryParameter("cu", "INR")
         uriBuilder.appendQueryParameter("mode", "intent")
+*/
 
-        val uri = uriBuilder.build()
+        //val uri = uriBuilder.build()
+        val uri = Uri.Builder()
+                .scheme("upi")
+                .authority("pay")
+                .appendQueryParameter("pa", "your-merchant-vpa@xxx")
+                .appendQueryParameter("pn", "your-merchant-name")
+                .appendQueryParameter("mc", "your-merchant-code")
+                .appendQueryParameter("tr", "your-transaction-ref-id")
+                .appendQueryParameter("tn", "your-transaction-note")
+                .appendQueryParameter("am", "your-order-amount")
+                .appendQueryParameter("cu", "INR")
+                .appendQueryParameter("url", "your-transaction-url")
+                .build();
+        Log.i("uri : {}", uri.toString())
         val intent = Intent(Intent.ACTION_VIEW, uri)
-
         val packageManager = activity.packageManager
 
         try {
@@ -118,6 +131,7 @@ class UpiPayPlugin internal constructor(registrar: Registrar, channel: MethodCha
                         "preferredOrder" to it.preferredOrder
                 )
             }
+            Log.i("activityResponse",activityResponse.toString());
 
             result?.success(activityResponse)
         } catch (ex: Exception) {

@@ -8,7 +8,8 @@ enum _UpiApplication {
   miPay,
   amazonPay,
   trueCallerUpi,
-  myAirtelUpi
+  myAirtelUpi,
+  whatsapp
 }
 
 class UpiApplication {
@@ -26,6 +27,7 @@ class UpiApplication {
   static final amazonPay = UpiApplication._(_UpiApplication.amazonPay);
   static final trueCallerUpi = UpiApplication._(_UpiApplication.trueCallerUpi);
   static final myAirtelUpi = UpiApplication._(_UpiApplication.myAirtelUpi);
+  static final whatsapp = UpiApplication._(_UpiApplication.whatsapp);
 
   String toString() {
     switch (_inner) {
@@ -49,8 +51,10 @@ class UpiApplication {
         return 'com.truecaller';
       case _UpiApplication.myAirtelUpi:
         return 'com.myairtelapp';
+        case _UpiApplication.whatsapp:
+        return 'com.whatsapp';
       default:
-        throw UnsupportedError('Invalid / Unsupported UPI Application');
+        //throw UnsupportedError('Invalid / Unsupported UPI Application');
     }
   }
 
@@ -76,6 +80,8 @@ class UpiApplication {
         return 'Truecaller';
       case _UpiApplication.myAirtelUpi:
         return 'MyAirtel';
+      case _UpiApplication.whatsapp:
+        return 'Whatsapp';
       default:
         throw UnsupportedError('Invalid / Unsupported UPI Application');
     }
